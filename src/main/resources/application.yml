@@ -1,0 +1,62 @@
+spring:
+  ai:
+    mcp:
+      server:
+        name: java-pulsar-mcp-server
+        version: 1.0.0
+        type: ASYNC
+        instructions: "Java implementation of Pulsar MCP Server providing comprehensive Apache Pulsar management and client operations"
+
+        # Transport configuration
+        sse-message-endpoint: /mcp/message
+        sse-endpoint: /sse
+
+        # Capabilities
+        capabilities:
+          resource: true
+          tool: true
+          prompt: true
+          completion: true
+
+        # Change notifications
+        resource-change-notification: true
+        prompt-change-notification: true
+        tool-change-notification: true
+
+server:
+  port: 8888
+
+pulsar:
+  admin:
+    url: http://localhost:8080
+  service:
+    url: pulsar://localhost:6650
+
+mcp:
+  features:
+    pulsar-admin-tenants: true
+#    pulsar-admin-namespaces: true
+    pulsar-admin-topics: true
+#    pulsar-admin-clusters: true
+#    pulsar-admin-brokers: true
+#    pulsar-admin-functions: true
+#    pulsar-admin-sources: true
+#    pulsar-admin-sinks: true
+#    pulsar-admin-schemas: true
+#    pulsar-admin-packages: true
+#    pulsar-admin-subscriptions: true
+#    pulsar-client: true
+#    functions-as-tools: true
+
+# Security profiles
+---
+spring:
+  config:
+    activate:
+      on-profile: write
+
+---
+spring:
+  config:
+    activate:
+      on-profile: read-only
